@@ -97,6 +97,8 @@ def cancel_order_manual(eni, driver_local):
             interact("type", '//*[@id="id_status"]', "Отменен")
             driver_local.find_element(By.XPATH, '//*[@id="id_status"]').send_keys(Keys.ENTER)   # Переписать. Выглядит некрасиво, но нет идей как сделать красиво
         interact("set", '//*[@name="is_active"]', False)   # make order non-active
+        if driver.find_element(By.XPATH, '//*[@id="id_client_system_id"]').text == "":
+            interact("type", '//*[@id="id_client_system_id"]', "1")
         interact("click", '//*[@id="order_form"]/div[1]/div[1]/div[1]/button[2]')
         wait_for_element(driver_local, '//*[@id="suit-center"]/div[1]')  # Форма //*[@id="order_form"]/div[2]/div/div
         print("success")
@@ -106,10 +108,7 @@ def cancel_order_manual(eni, driver_local):
 
 
 eni = {"uid": "d43c40ed-f6f7-496c-84f6-f3b0c73de771", "order_number": "24710"}
-orders = {"6970025875": "	e70813a6-62ff-4eaa-a4d7-53c963d20cf2", "6970281552": "2b6b2c1b-146a-457e-b2d3-dc8c4adac52a",
-          "6970339465": "7f082b1f-1260-4124-8267-5b4f729950d6", "6970591896": "bdcd9460-20a1-4f50-897d-678b3de0bd35",
-          "123789": "0c67b402-6f48-4163-865b-f96382c5345c", "6970467676": "35a1adfc-29ce-43a0-82bf-7d3d4c43508a",
-          "6970444346": "06b36458-0b28-4928-89ab-0572f11d3bfe", "6970054116": "	40c3f5d1-2dc7-42c5-b0c1-9dcad731a954"}
+orders = {"6970544844": "d40e4e23-ed00-4f89-8fe3-53103cbf7363"}
 
 for i in orders.keys():
     eni.update({"uid": orders.get(i), "order_number": i})
