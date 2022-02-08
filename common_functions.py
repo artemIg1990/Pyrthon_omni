@@ -57,9 +57,9 @@ def run_request(request_data, auth):
     return {"code": req.status_code, "body": req.json()}
 
 
-def check_order_exist(order_number: str, order_guid: str):
-    order_number_exist = run_request(general_api_requests.barcode_read({"order_number": order_number}), True)
-    order_guid_exist = run_request(general_api_requests.barcode_read({"order_guid": order_guid}), True)
+def check_order_exist(envi: dict):
+    order_number_exist = run_request(general_api_requests.barcode_read(envi), True)
+    order_guid_exist = run_request(general_api_requests.barcode_read(envi), True)
     if order_number_exist.get("code") == 200 or order_guid_exist.get("code") == 200:
         # Order exist
         return True
@@ -74,7 +74,7 @@ def prepare_envi(params: dict):
         }
     envi.update({"order_guid": guid_generator()})
     envi.update({"order_number": barcode_generator_six()})
-    while not check_order_exist(envi.get("order_number"), envi.get("order_guid")):    # подумать как заменить рекурсию циклом если в этом есть смысл
+    while check_order_exist(envi):    # подумать как заменить рекурсию циклом если в этом есть смысл
         prepare_envi(params)
     envi.update({"price": params.get("price", 0)})
     envi.update({"status": params.get("status", 0)})
