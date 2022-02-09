@@ -53,17 +53,4 @@ body_list = [
 
 ]
 
-a = 5
 
-b= 6
-
-
-def summer(a):
-
-    global b
-    b += a
-    return b
-
-
-summer(a)
-print(b)
