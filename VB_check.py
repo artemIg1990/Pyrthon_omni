@@ -11,7 +11,7 @@ from selenium.common import exceptions
 
 
 driver_options = Options()
-driver_options.add_argument(f"--window-size={config.window_sise}")  # вынести
+driver_options.add_argument(f"--window-size={config.window_size}")  # вынести
 driver = webdriver.Chrome(options=driver_options)
 
 
