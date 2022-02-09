@@ -1,8 +1,8 @@
-
 import logging
 
 DHurl = "http://dev.hub.omnic.solutions/"
 BHurl = "https://brandshub-test.omnic.solutions/"
+VB_url = "http://incsoft.space:3000/#/"
 apiVersion = "api/2.0.0/"
 atolToken = "Token 8ee5cf663f99b61f69082f5aaf8fac4194e020a7"
 omniToken = "Token 803b28a3406911b36684d8a6c266fa54dbf00798"
@@ -16,6 +16,8 @@ order_status_placed = 3
 logging_level = logging.DEBUG
 login_bh_cc = "ignatenko.a"
 password_bh_cc = "123456"
+window_sise = "1080,1920"
+
 
 #Локальные переменные. Можно менять для конкретного тест-рана
 device_id = "0011"
