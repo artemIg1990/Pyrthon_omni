@@ -9,17 +9,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common import exceptions
 
-driver = webdriver.Chrome()  # Дописать параметры в конфиг, перенести сюда
+# driver = webdriver.Chrome()  # Дописать параметры в конфиг, перенести сюда
                              # Переписать ексепты по-людски
 
 
-def interact(method: str, element_xpath: str, value=""):
+def interact(driver, method: str, element_xpath: str, value=""):
     if method == "click":
         try:
             element = driver.find_element(By.XPATH, element_xpath)
             element.click()
-        except:
-            return f"ERROR: Unable to find element {element_xpath} by XPath."
+        except exceptions as ex:
+            return f"ERROR: Unable to find element {element_xpath} by XPath., {ex}"
     elif method == "type":
         try:
             element = driver.find_element(By.XPATH, element_xpath)
@@ -109,7 +109,8 @@ def cancel_order_manual(eni, driver_local):
 
 eni = {"uid": "d43c40ed-f6f7-496c-84f6-f3b0c73de771", "order_number": "24710"}
 orders = {"6970544844": "d40e4e23-ed00-4f89-8fe3-53103cbf7363"}
-
+"""
 for i in orders.keys():
     eni.update({"uid": orders.get(i), "order_number": i})
     cancel_order_manual(eni, driver)
+"""
