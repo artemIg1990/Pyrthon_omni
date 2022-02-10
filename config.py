@@ -16,7 +16,7 @@ order_status_placed = 3
 logging_level = logging.DEBUG
 login_bh_cc = "ignatenko.a"
 password_bh_cc = "123456"
-window_size = "1024,1080"
+window_size = "1280,1024"
 
 
 #Локальные переменные. Можно менять для конкретного тест-рана

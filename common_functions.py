@@ -36,11 +36,11 @@ def guid_generator():
     return guid
 
 
-def run_request(request_data, auth):
-    method = request_data.get("method")
-    url = request_data.get("url")
+def run_request(request_data: dict):
+    method = request_data.get("method", "GET")
+    url = request_data.get("url", config.BHurl)
     header = request_data.get("header")
-    if not auth:
+    if not request_data.get("auth", False):
         header.update({"Authorization": "null"})
     if method == "GET":
         req = requests.get(url, headers=header)
@@ -58,8 +58,8 @@ def run_request(request_data, auth):
 
 
 def check_order_exist(envi: dict):
-    order_number_exist = run_request(general_api_requests.barcode_read(envi), True)
-    order_guid_exist = run_request(general_api_requests.barcode_read(envi), True)
+    order_number_exist = run_request(general_api_requests.barcode_read(envi))
+    order_guid_exist = run_request(general_api_requests.barcode_read(envi))
     if order_number_exist.get("code") == 200 or order_guid_exist.get("code") == 200:
         # Order exist
         return True
@@ -70,7 +70,7 @@ def check_order_exist(envi: dict):
 def prepare_envi(params: dict):
     envi = {
             "token": config.VDNG_token, "device_id": config.device_id, "phone": config.recipient_phone,
-            "status": config.order_status_reserved
+            "status": config.order_status_reserved, "auth": True
         }
     envi.update({"order_guid": guid_generator()})
     envi.update({"order_number": barcode_generator_six()})

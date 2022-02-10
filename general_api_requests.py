@@ -2,11 +2,21 @@ import config
 import json
 
 
+def new_header(eni):
+    if eni.get("auth", False):
+        header = {
+            "Authorization": config.dev_token,
+            "Content-Type": "application/json"
+            }
+    else:
+        header = {
+            "Content-Type": "application/json"
+            }
+    return header
+
+
 def get_order_info(eni):
-    headers = {
-        "Authorization": config.dev_token,
-        "Content-Type": "application/json"
-    }
+    headers = new_header(eni)
     url_request = f"{config.DHurl}{config.apiVersion}order/{eni['uid']}/view/"
     return {"header": headers, "url": url_request, "method": "GET"}
 

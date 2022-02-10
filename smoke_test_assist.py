@@ -4,7 +4,7 @@ import general_api_requests
 import PyQt5
 
 created_orders = {}
-params = {"price": 0, "status": 0, "client_order": False}
+# params = {"price": 0, "status": 0, "client_order": False}
 
 
 def create_order(params: dict):
