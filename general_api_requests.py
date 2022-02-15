@@ -57,15 +57,12 @@ def set_order_status(eni):
 
 
 def create_order(eni):
-    headers = {
-        "Authorization": config.dev_token,
-        "Content-Type": "application/json"
-    }
+    headers = eni.get("header")
     request_body = {
     "device_id": eni.get("device_id"),
     "ref_order": "",
     "order_type": 5,
-    "status": int(eni["status"]),
+    "status": int(eni.get("status"), 0),
     "client_system_id": "John(AUTO)Doe",
     "barcode": f"bar-{eni.get('order_number')}",
     "guid": f"auto-guid{eni.get('order_number')}",

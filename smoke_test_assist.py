@@ -9,7 +9,7 @@ created_orders = {}
 
 def create_order(params: dict):
     envi = common_functions.prepare_envi(params)
-    new_order = common_functions.run_request(general_api_requests.create_order(envi), True)
+    new_order = common_functions.run_request(general_api_requests.create_order(envi))
     if new_order["code"] == 201:
         created_orders.update(new_order.get("body"))
     else:
