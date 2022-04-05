@@ -1,7 +1,6 @@
 import config
 import common_functions
 import general_api_requests
-import PyQt5
 
 created_orders = {}
 # params = {"price": 0, "status": 0, "client_order": False}

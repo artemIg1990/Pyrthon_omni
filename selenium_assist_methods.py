@@ -55,7 +55,7 @@ def interact(driver, method: str, element_xpath: str, value=""):
 
 def wait_for_element(driver_local, element_xpath):
     try:
-        element = WebDriverWait(driver, 5).until(
+        element = WebDriverWait(driver_local, 5).until(
             ec.presence_of_element_located((By.XPATH, element_xpath))
         )
     except:
@@ -98,7 +98,7 @@ def cancel_order_manual(eni, driver_local):
             interact("type", '//*[@id="id_status"]', "Отменен")
             driver_local.find_element(By.XPATH, '//*[@id="id_status"]').send_keys(Keys.ENTER)   # Переписать. Выглядит некрасиво, но нет идей как сделать красиво
         interact("set", '//*[@name="is_active"]', False)   # make order non-active
-        if driver.find_element(By.XPATH, '//*[@id="id_client_system_id"]').text == "":
+        if driver_local.find_element(By.XPATH, '//*[@id="id_client_system_id"]').text == "":
             interact("type", '//*[@id="id_client_system_id"]', "1")
         interact("click", '//*[@id="order_form"]/div[1]/div[1]/div[1]/button[2]')
         wait_for_element(driver_local, '//*[@id="suit-center"]/div[1]')  # Форма //*[@id="order_form"]/div[2]/div/div
