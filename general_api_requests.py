@@ -33,6 +33,7 @@ def delete_order(eni):
     body_json = json.dumps(request_body, skipkeys=True, separators=None)
     return {"header": headers, "body": body_json, "url": url_request, "method": "DELETE"}
 
+
 def check_cells_status(eni):
     headers = {
         "Authorization": config.dev_token,
@@ -93,6 +94,7 @@ def create_order(eni):
     body_json = json.dumps(request_body)
     url_request = f"{config.DHurl}{config.apiVersion}order/"
     return {"header": headers, "body": body_json, "url": url_request, "method": "POST"}
+
 
 def barcode_read(eni):
     headers = {
